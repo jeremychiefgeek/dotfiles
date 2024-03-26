@@ -2,6 +2,7 @@ env:
   TERM: xterm-256color
 
 window:
+  decorations: none 
   opacity: .75 
   dimensions:
     columns: 80
