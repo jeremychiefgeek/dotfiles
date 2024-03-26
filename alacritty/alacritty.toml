@@ -4,7 +4,7 @@ TERM                = "xterm-256color"
 
 [window]
 decorations         = "Buttonless" 
-opacity             = 0.75 
+opacity             = 0.85 
 dimensions          = { columns = 80, lines = 24 }
 padding             = { x = 2, y = 2 }
 
@@ -20,13 +20,15 @@ startup_mode        = "maximized"
 history           = 100000
 multiplier        = 3
 
+[colors]
 transparent_background_colors = true
+draw_bold_text_with_bright_colors = true
 
 
 [font]
 normal            = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 bold              = { family = "JetBrainsMono Nerd Font", style = "Bold" }
 italic            = { family = "JetBrainsMono Nerd Font", style = "Italic" }
-size              = 11.0
+size              = 12.0
 offset            = { x = 0, y = 0 }
 
