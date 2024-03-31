@@ -36,7 +36,7 @@ require('mason-lspconfig').setup({
   ensure_installed = {
   'tsserver',
   'clangd',
-  'omnisharp',
+  'csharp_ls',
   'cssls',
   'tailwindcss',
   'volar',
