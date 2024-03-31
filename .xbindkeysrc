@@ -68,21 +68,17 @@
 ##################################
 # Start of My Config
 ##################################
-# Place shell command in quotes and keysym on a new line
-"SHELL-COMMAND"
-  KEYSYM
-
 # Use XF86AudioMute to mute volume
 "${HOME}/scripts/volume.sh mute"
-   XF86AudioMute
+  XF86AudioMute
 
 # Use XF86AudioRaiseVolume to raise volume
 "${HOME}/scripts/volume.sh raise"
-   XF86AudioRaiseVolume
+  XF86AudioRaiseVolume
 
 # Use XF86AudioLowerVolume to lower volume
 "${HOME}/scripts/volume.sh lower"
-   XF86AudioLowerVolume
+ XF86AudioLowerVolume
 
 ##################################
 # End of xbindkeys configuration #
