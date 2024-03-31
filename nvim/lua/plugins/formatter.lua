@@ -56,7 +56,7 @@ return {
 						-- Full specification of configurations is down below and in Vim help
 						-- files
 						return {
-							exe = "dotnet-csharpier",
+							exe = "csharpier",
 							args = {},
 							stdin = true,
 						}
