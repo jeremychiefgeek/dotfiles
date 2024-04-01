@@ -5,7 +5,7 @@
     "spacing": 0, 
     "margin-top": 4,
     "modules-left": ["clock#date", "custom/updates"],
-    "modules-center": ["wlr/workspaces"],
+    "modules-center": ["hyprland/workspaces"],
     "modules-right": ["battery", "cpu", "memory", "pulseaudio","clock"],
     "custom/updates": {
         "exec": "checkupdates | wc -l",
@@ -38,7 +38,7 @@
     "memory": {
         "format": " {}%"
     },
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
 	"active-only": false,
