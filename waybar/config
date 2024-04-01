@@ -6,12 +6,24 @@
     "margin-top": 4,
     "modules-left": ["clock#date", "custom/updates"],
     "modules-center": ["wlr/workspaces"],
-    "modules-right": ["cpu", "memory", "pulseaudio","clock"],
+    "modules-right": ["battery", "cpu", "memory", "pulseaudio","clock"],
     "custom/updates": {
         "exec": "checkupdates | wc -l",
 	"format": "󰮯 {} pending updates",
 	"interval": 60 
     },
+    "battery": {
+        	"states": {
+            		"warning": 30,
+            		"critical": 15
+        	},
+        	"format": "{icon} {capacity}%",
+        	"format-charging": "󰂄 {capacity}%",
+        	"format-plugged": "󰚥 {capacity}%",
+        	"format-alt": "{time} {icon}",
+        	"format-full": "󱊣 {capacity}%",
+        	"format-icons": ["󱊡", "󱊢", "󱊣"]
+	},
     "clock": {
         "format": "󰥔 {:%I:%M%p}",
     	"height": 26
@@ -20,7 +32,7 @@
 	"format": " {:%A, %b %d}"
     },
     "cpu": {
-        "format": " {usage}%",
+        "format": " {usage}%",
         "tooltip": false
     },
     "memory": {
