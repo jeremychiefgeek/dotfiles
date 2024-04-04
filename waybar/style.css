@@ -46,6 +46,7 @@ window#waybar.hidden {
 /* Common Widget Styles */
 
 #custom-updates,
+#custom-spotify,
 #window,
 #workspaces,
 #clock,
@@ -75,6 +76,10 @@ window#waybar.hidden {
     font-weight: 600;
 }
 
+#custom-spotify {
+    color: #f6c177;
+    font-weight: 600;
+}
 
 /* Battery Usage */
 #battery {
@@ -100,7 +105,7 @@ window#waybar.hidden {
 }
 
 /* Time Clock */
-#clock { 
+#clock {
     color: #c4a7e7;
     margin-right: 0;
 }
