@@ -4,7 +4,7 @@ TERM                = "xterm-256color"
 
 [window]
 decorations         = "Buttonless"
-opacity             = 0.85
+opacity             = 1.0
 dimensions          = { columns = 80, lines = 24 }
 padding             = { x = 10, y = 10 }
 
