@@ -5,11 +5,15 @@ return {
 	config = function()
 		require("harpoon"):setup()
 	end,
+	settings = {
+		save_on_toggle = true,
+		save_on_ui_close = true,
+	},
 	keys = {
 		{
 			"<leader>a",
 			function()
-				require("harpoon"):list():append()
+				require("harpoon"):list():add()
 			end,
 			desc = "harpoon file",
 		},
