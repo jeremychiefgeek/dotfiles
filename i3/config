@@ -69,7 +69,8 @@ client.background        $base
 exec --no-startup-id nitrogen --restore 
 
 # transparency
-exec --no-startup-id picom-trans
+#exec --no-startup-id picom-trans -c
+exec --no-startup-id picom -CGb
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
