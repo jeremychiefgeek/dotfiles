@@ -66,10 +66,10 @@ client.background        $base
 
 
 # for wallpaper
-exec always nitrogen --restore
+exec --no-startup-id nitrogen --restore 
 
 # transparency
-exec picom-trans
+exec --no-startup-id picom-trans
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
