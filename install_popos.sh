@@ -36,7 +36,7 @@ apt install ibconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-d
 clear
 echo "##########  NodeJs  ##########"
 
-curl -fsSL https://deb.nodesource.com/setup_20.x | -E bash - &&\
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && \
 apt install -y nodejs
 echo "fs.inotify.max_user_watches=10000000" | tee -a /etc/sysctl.conf
 node --version
@@ -68,7 +68,7 @@ clear
 echo "########## Software ##########"
 
 echo "########## Installing Docker ##########"
-apt install apt-transport-https ca-certificates curl software-properties-common
+apt install apt-transport-https ca-certificates curl software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 apt-key fingerprint 0EBFCD88
 
@@ -81,7 +81,7 @@ apt-key fingerprint 0EBFCD88
 
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 apt update
-apt install docker-ce
+apt install docker-ce -y
 docker --version
 
 # Running "docker --version" should display "Docker version 19.03.6, build 369ce74a3c" or newer
@@ -99,21 +99,21 @@ clear
 echo "########## Spotify ##########"
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free" | tee /etc/apt/sources.list.d/spotify.list
-apt update && apt install spotify-client
+apt update && apt install spotify-client -y
 
 clear
 echo "########## Installing Google Chrome ##########"
 cd ~/Downloads
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 dpkg -i google-chrome-stable_current_amd64.deb
-apt-get install -f
+apt-get install -f -y
 
 clear
 echo "##########  Installing Rust/Cargo ##########"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 echo "##########  Installing Alacritty ##########"
-cargo install alacritty
+cargo install alacritty -y
 
 clear
 echo "########## Installing Neovim  ##########"
