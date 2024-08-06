@@ -36,7 +36,7 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"tsserver",
 		"clangd",
-		"csharp-ls",
+		"csharp_ls",
 		"cssls",
 		"tailwindcss",
 		"volar",
