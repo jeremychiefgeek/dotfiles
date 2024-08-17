@@ -14,6 +14,7 @@ end
 
 vim.opt.termguicolors = true
 vim.opt.rtp:prepend(lazypath)
+vim.opt.wrap = true
 
 require("lazy").setup("plugins")
 
