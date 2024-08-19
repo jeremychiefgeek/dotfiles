@@ -6,7 +6,7 @@ return {
 		require("harpoon"):setup()
 	end,
 	settings = {
-		save_on_toggle = true,
+		save_on_toggle = false,
 		save_on_ui_close = true,
 	},
 	keys = {
