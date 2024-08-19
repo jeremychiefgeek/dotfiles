@@ -164,6 +164,7 @@ require("lazy").setup({
 						local map = function(keys, func, desc)
 							vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 						end
+						local bufnr = event.buf
 
 						map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
@@ -192,6 +193,9 @@ require("lazy").setup({
 								vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 							end, "[T]oggle Inlay [H]ints")
 						end
+						require("lsp_signature").on_attach({
+							-- ... setup options here ...
+						}, bufnr)
 					end,
 				})
 				local capabilities = vim.lsp.protocol.make_client_capabilities()
