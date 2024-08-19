@@ -187,36 +187,6 @@ require("lazy").setup({
 
 						map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-						local client = vim.lsp.get_client_by_id(event.data.client_id)
-						if
-							client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight)
-						then
-							local highlight_augroup =
-								vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-							vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-								buffer = event.buf,
-								group = highlight_augroup,
-								callback = vim.lsp.buf.document_highlight,
-							})
-
-							vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-								buffer = event.buf,
-								group = highlight_augroup,
-								callback = vim.lsp.buf.clear_references,
-							})
-
-							vim.api.nvim_create_autocmd("LspDetach", {
-								group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
-								callback = function(event2)
-									vim.lsp.buf.clear_references()
-									vim.api.nvim_clear_autocmds({
-										group = "kickstart-lsp-highlight",
-										buffer = event2.buf,
-									})
-								end,
-							})
-						end
-
 						if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
 							map("<leader>th", function()
 								vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
@@ -406,7 +376,7 @@ require("lazy").setup({
 						end
 						return "make install_jsregexp"
 					end)(),
-					dependencies = {},
+					dependencies = { "rafamadriz/friendly-snippets" },
 				},
 				"saadparwaiz1/cmp_luasnip",
 
@@ -418,9 +388,13 @@ require("lazy").setup({
 			},
 			config = function()
 				-- See `:help cmp`
+				vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+				require("luasnip.loaders.from_vscode").lazy_load()
 				local cmp = require("cmp")
 				local luasnip = require("luasnip")
 				luasnip.config.setup({})
+				local select_opts = { behavior = cmp.SelectBehavior.Select }
 
 				cmp.setup({
 					snippet = {
@@ -428,53 +402,48 @@ require("lazy").setup({
 							luasnip.lsp_expand(args.body)
 						end,
 					},
-					completion = { completeopt = "menu,menuone,noinsert" },
+					sources = {
+						{ name = "path" },
+						{ name = "nvim_lsp", keyword_length = 1 },
+						{ name = "buffer", keyword_length = 3 },
+						{ name = "luasnip", keyword_length = 2 },
+					},
 					window = {
 						documentation = cmp.config.window.bordered(),
-						completion = cmp.config.window.bordered(),
 					},
-					view = {
-						documentation = {
-							auto_open = true,
-						},
-						docs = {
-							auto_open = true,
-						},
-					},
+					formatting = {
+						fields = { "menu", "abbr", "kind" },
+						expandable_indicator = true,
+						format = function(entry, item)
+							local menu_icon = {
+								nvim_lsp = "λ",
+								luasnip = "⋗",
+								buffer = "Ω",
+								path = "🖫",
+							}
 
-					-- For an understanding of why these mappings were
-					-- chosen, you will need to read `:help ins-completion`
-					--
-					-- No, but seriously. Please read `:help ins-completion`, it is really good!
-					mapping = cmp.mapping.preset.insert({
-						["<Tab>"] = cmp.mapping.select_next_item(),
-						["<S-Tab>"] = cmp.mapping.select_prev_item(),
-						["<C-b>"] = cmp.mapping.scroll_docs(-4),
-						["<C-f>"] = cmp.mapping.scroll_docs(4),
-						["<C-y>"] = cmp.mapping.confirm({ select = true }),
-						["<C-Space>"] = cmp.mapping.complete({}),
-						["<C-l>"] = cmp.mapping(function()
-							if luasnip.expand_or_locally_jumpable() then
-								luasnip.expand_or_jump()
-							end
-						end, { "i", "s" }),
-						["<C-h>"] = cmp.mapping(function()
-							if luasnip.locally_jumpable(-1) then
-								luasnip.jump(-1)
-							end
-						end, { "i", "s" }),
-					}),
-					sources = {
-						{
-							name = "lazydev",
-							group_index = 0,
-						},
-						{ name = "nvim_lsp" },
-						{ name = "luasnip" },
-						{ name = "path" },
+							item.menu = menu_icon[entry.source.name]
+							return item
+						end,
+					},
+					mapping = {
+						--["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+						--["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+						["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
+						["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
+						["<CR>"] = cmp.mapping.confirm({ select = true }),
+						["<C-Space>"] = cmp.mapping.complete(),
 					},
 				})
 				cmp.visible_docs()
+			end,
+		},
+		{
+			"ray-x/lsp_signature.nvim",
+			event = "VeryLazy",
+			opts = {},
+			config = function(_, opts)
+				require("lsp_signature").setup(opts)
 			end,
 		},
 	},
