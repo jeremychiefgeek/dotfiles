@@ -540,6 +540,15 @@ require("lazy").setup({
 				"rcarriga/nvim-notify",
 			},
 		},
+		{ "CRAG666/code_runner.nvim", config = true },
+		{
+			"folke/zen-mode.nvim",
+			opts = {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			},
+		},
 	},
 	-- automatically check for plugin updates
 	checker = { enabled = true },
