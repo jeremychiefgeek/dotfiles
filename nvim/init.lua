@@ -558,6 +558,18 @@ require("lazy").setup({
 					end,
 				},
 			},
+            -- stylua: ignore
+            keys = {
+              { "<silent> <F5>", function() require("dap").continue() end },
+              { "<silent> <F10>", function() require("dap").step_over() end },
+              { "<silent> <F11>", function() require("dap").step_into() end },
+              { "<silent> <F12>", function() require("dap").step_out() end },
+              { "<silent> <leader>b", function() require("dap").toggle_breakpoint() end },
+              { "<silent> <leader>B", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
+              { "<silent> <leader>lp", function() require("dap").set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end },
+              { "<silent> <leader>dr", function() require("dap").repl.open() end },
+              { "<silent> <leader>dl", function() require("dap").run_last() end },
+            },
 		},
 		{
 			"rcarriga/nvim-dap-ui",
