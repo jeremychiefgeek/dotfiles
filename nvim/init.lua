@@ -514,6 +514,11 @@ require("lazy").setup({
 			event = "VeryLazy",
 			opts = {
 				-- add any options here
+				lsp = {
+					signature = {
+						enabled = false,
+					},
+				},
 			},
 			dependencies = {
 				-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -540,12 +545,13 @@ require("lazy").setup({
 					"jbyuki/one-small-step-for-vimkind",
 					config = function()
 						local dap = require("dap")
+
 						dap.adapters.coreclr = {
 							type = "executable",
 							command = "/usr/local/bin/netcoredbg/netcoredbg",
 							args = { "--interpreter=vscode" },
 						}
-						dap.configurations.lua = {
+						dap.configurations.cs = {
 							{
 								type = "coreclr",
 								name = "launch - netcoredbg",
@@ -558,18 +564,20 @@ require("lazy").setup({
 					end,
 				},
 			},
-            -- stylua: ignore
-            keys = {
-              { "<silent> <F5>", function() require("dap").continue() end },
-              { "<silent> <F10>", function() require("dap").step_over() end },
-              { "<silent> <F11>", function() require("dap").step_into() end },
-              { "<silent> <F12>", function() require("dap").step_out() end },
-              { "<silent> <leader>pb", function() require("dap").toggle_breakpoint() end },
-              { "<silent> <leader>pB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
-              { "<silent> <leader>lp", function() require("dap").set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end },
-              { "<silent> <leader>dr", function() require("dap").repl.open() end },
-              { "<silent> <leader>dl", function() require("dap").run_last() end },
-            },
+                -- stylua: ignore
+                keys = {
+                    { "<leader>d", "", desc = "+debug", mode = {"n", "v"} },
+                    { "<leader>B", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
+                    { "<leader>b", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+                    { "<F5>", function() require("dap").continue() end, desc = "Continue" },
+                    { "<F10>", function() require("dap").step_over() end, desc = "Step Over" },
+                    { "<F11>", function() require("dap").step_into() end, desc = "Step Into" },
+                    { "<F12>", function() require("dap").step_out() end, desc = "Step Out" },
+                    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+                    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+                    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+                    { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" }
+                },
 		},
 		{
 			"rcarriga/nvim-dap-ui",
