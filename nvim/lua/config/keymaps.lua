@@ -41,6 +41,15 @@ keymap.set("n", "<C-S-l>", "<C-w>>")
 keymap.set("n", "<C-S-k>", "<C-w>+")
 keymap.set("n", "<C-S-j>", "<C-w>-")
 
+-- Move Lines up and down
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Show Signature
+keymap.set({ "n" }, "<C-K>", function()
+  require("lsp_signature").toggle_float_win()
+end, { silent = true, noremap = true, desc = "toggle signature" })
+
 -- Diagnostics
 keymap.set("n", "<C-j>", function()
   vim.diagnostic.goto_next()
