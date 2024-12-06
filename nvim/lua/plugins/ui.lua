@@ -9,6 +9,10 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    enabled = true,
+  },
+  {
+    "folke/which-key.nvim",
     enabled = false,
   },
   -- messages, cmdline and the popupmenu
