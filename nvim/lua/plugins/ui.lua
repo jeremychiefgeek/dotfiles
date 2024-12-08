@@ -1,15 +1,15 @@
 return {
-  {
-    "nvimdev/dashboard-nvim",
-    enabled = false,
-  },
+  -- {
+  --   "nvimdev/dashboard-nvim",
+  --   enabled = false,
+  -- },
   {
     "nvim-neo-tree/neo-tree.nvim",
     enabled = false,
   },
   {
     "nvim-lualine/lualine.nvim",
-    enabled = true,
+    enabled = false,
   },
   {
     "folke/which-key.nvim",
@@ -210,10 +210,6 @@ return {
           },
         },
       })
-
-      if vim.fn.argc(-1) == 0 then
-        vim.cmd("NvimTreeFocus")
-      end
     end,
   },
 }

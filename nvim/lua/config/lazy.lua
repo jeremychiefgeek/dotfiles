@@ -31,6 +31,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.rust" },
     { import = "lazyvim.plugins.extras.coding.mini-comment" },
+    { import = "lazyvim.plugins.extras.ui.edgy" },
     -- Do I actually want to use copilot
     -- { import = "lazyvim.plugins.extras.ai.copilot" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
