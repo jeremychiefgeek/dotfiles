@@ -1,8 +1,8 @@
 return {
-  -- {
-  --   "nvimdev/dashboard-nvim",
-  --   enabled = false,
-  -- },
+  {
+    "mason-nvim-dap.nvim",
+    ensure_installed = { "coreclr" },
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     enabled = false,
