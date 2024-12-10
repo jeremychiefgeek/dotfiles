@@ -8,7 +8,11 @@ return {
     },
     config = function()
       require("mason").setup() -- Mason setup must run before csharp, only if you want to use omnisharp
-      require("csharp").setup()
+      require("csharp").setup({
+        dap = {
+          adapter_name = "netcoredbg",
+        },
+      })
     end,
   },
 }
