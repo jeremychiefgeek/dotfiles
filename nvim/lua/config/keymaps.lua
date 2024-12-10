@@ -47,7 +47,12 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Debugging Keymaps
 keymap.set("n", "<F5>", function()
-  require("dap").continue()
+  --require("dap").continue()
+  require("csharp").run_project()
+end, { desc = "Start/Continue Debugging" })
+keymap.set("n", "<F6>", function()
+  --require("dap").continue()
+  require("csharp").debug_project()
 end, { desc = "Start/Continue Debugging" })
 keymap.set("n", "<F9>", function()
   require("dap").toggle_breakpoint()
