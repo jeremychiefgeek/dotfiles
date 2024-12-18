@@ -1,18 +1,18 @@
 return {
   -- MASON
-  -- {
-  --   "williamboman/mason.nvim",
-  --   opts = function(_, opts)
-  --     vim.list_extend(opts.ensure_installed, {
-  --       "luacheck",
-  --       "shellcheck",
-  --       "shfmt",
-  --       "tailwindcss-language-server",
-  --       "typescript-language-server",
-  --       "css-lsp",
-  --     })
-  --   end,
-  -- },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
+        "luacheck",
+        "shellcheck",
+        "shfmt",
+        "tailwindcss-language-server",
+        "typescript-language-server",
+        "css-lsp",
+      })
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -20,6 +20,7 @@ return {
       ---@type lspconfig.options
       servers = {
         cssls = {},
+        omnisharp = {},
         tailwindcss = {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
