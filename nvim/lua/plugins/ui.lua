@@ -19,7 +19,6 @@ return {
       render = "wrapped-compact",
     },
   },
-
   -- buffer line
   {
     "akinsho/bufferline.nvim",
