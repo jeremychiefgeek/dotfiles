@@ -3,6 +3,7 @@
 -- Add any additional options here
 
 vim.g.mapleader = " "
+vim.g.lazyvim_blink_main = false
 
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"

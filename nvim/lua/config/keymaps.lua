@@ -41,6 +41,9 @@ keymap.set("n", "<C-S-l>", "<C-w>>")
 keymap.set("n", "<C-S-k>", "<C-w>+")
 keymap.set("n", "<C-S-j>", "<C-w>-")
 
+-- Open File Explorer
+--keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
 -- LSP Definitions
 -- keymap.set("n", "gd", function()
 --   require("telescope.builtin").lsp_definitions()
