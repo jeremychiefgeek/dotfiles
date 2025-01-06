@@ -130,6 +130,7 @@ return {
   {
     "saghen/blink.cmp",
     event = "InsertEnter",
+    enabled = false,
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.compat",
