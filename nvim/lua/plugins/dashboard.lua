@@ -56,7 +56,7 @@ return {
           { section = "startup" },
           {
             section = "terminal",
-            cmd = "ascii-image-converter ~/dotfiles/2.png -C -c",
+            cmd = 'ascii-image-converter "%userprofile%/dotfiles/2.png" -C -c',
             random = 10,
             pane = 2,
             height = 30,
