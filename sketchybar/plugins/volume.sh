@@ -1,18 +1,29 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 
-case ${INFO} in
-0)
-    ICON=""
-    ICON_PADDING_RIGHT=21
-    ;;
-[0-9])
-    ICON=""
-    ICON_PADDING_RIGHT=12
-    ;;
+# The volume_change event supplies a $INFO variable in which the current volume
+# percentage is passed to the script.
+
+source "$HOME/.config/colors.sh"
+source "$HOME/.config/icons.sh"
+
+VOLUME=$(osascript -e 'set ovol to output volume of (get volume settings)')
+
+case $VOLUME in
+[8-9][0-9] | 100)
+	ICON=${ICONS_VOLUME[3]}
+	;;
+[6-7][0-9])
+	ICON=${ICONS_VOLUME[2]}
+	;;
+[2-3][0-9] | [4-5][0-9])
+	ICON=${ICONS_VOLUME[1]}
+	;;
 *)
-    ICON=""
-    ICON_PADDING_RIGHT=6
-    ;;
+	ICON=${ICONS_VOLUME[0]}
+	;;
 esac
 
-sketchybar --set $NAME icon=$ICON icon.padding_right=$ICON_PADDING_RIGHT label="$INFO%"
+sketchybar --set $NAME icon=$ICON \
+	icon.color=$COLOR_DEFAULT \
+	label=" $VOLUME% " \
+	label.color=$COLOR_DEFAULT
