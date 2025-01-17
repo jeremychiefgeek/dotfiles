@@ -130,7 +130,7 @@ return {
   {
     "saghen/blink.cmp",
     event = "InsertEnter",
-    enabled = false,
+    enabled = true,
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.compat",
@@ -149,7 +149,6 @@ return {
     opts = {
       completion = {},
       appearance = {
-        use_nvim_cmp_as_default = true,
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
         -- will be removed in a future release, assuming themes add support
