@@ -1,15 +1,16 @@
-local settings = require("config.settings")
+local settings = require("settings")
+local colors = require("colors")
 
+-- Equivalent to the --bar domain
 sbar.bar({
-	topmost = "window",
-	height = settings.dimens.graphics.bar.height,
-	color = settings.colors.bar.transparent,
-	padding_right = settings.dimens.padding.right,
-	padding = settings.dimens.padding.bar,
-	padding_left = settings.dimens.padding.left,
-	margin = settings.dimens.padding.bar,
-	corner_radius = settings.dimens.graphics.background.corner_radius,
-	y_offset = settings.dimens.graphics.bar.offset,
-	-- blur_radius = settings.dimens.graphics.blur_radius,
-	border_width = 0,
+  sticky = on,
+  position= top,
+  height = settings.bar_height,
+  margin=settings.bar_margin,
+  color = colors.bar.bg,
+  padding_right=settings.bar_padding,
+  padding_left=settings.bar_padding,
+  corner_radius=settings.bar_corner_radius,
+  blur_radius=settings.bar_blur_radius,
+  y_offset=settings.bar_margin
 })

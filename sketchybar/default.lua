@@ -1,66 +1,55 @@
-local settings = require("config.settings")
+local settings = require("settings")
+local colors = require("colors")
 
+-- Equivalent to the --default domain
 sbar.default({
   updates = "when_shown",
   icon = {
     font = {
-      family = settings.fonts.text,
-      style = settings.fonts.styles.regular,
-      size = settings.dimens.text.icon,
+      family = settings.font.icons,
+      style = settings.font.style_map["Regular"],
+      size = settings.font.sizes.icons
     },
-    color = settings.colors.white,
-    padding_left = settings.dimens.padding.icon,
-    padding_right = settings.dimens.padding.icon,
+    color = colors.white,
+    padding_left = settings.paddings,
+    padding_right = settings.paddings,
+    background = { image = { corner_radius = settings.item_corner_radius } },
   },
   label = {
     font = {
-      family = settings.fonts.text,
-      style = settings.fonts.styles.regular,
-      size = settings.dimens.text.label,
+      family = settings.font.text,
+      style = settings.font.style_map["Medium"],
+      size = settings.font.sizes.text
     },
-    color = settings.colors.white,
-    padding_left = settings.dimens.padding.label,
-    padding_right = settings.dimens.padding.label,
+    color = colors.white,
+    padding_left = settings.paddings,
+    padding_right = settings.paddings,
   },
   background = {
-    height = settings.dimens.graphics.background.height,
-    corner_radius = settings.dimens.graphics.background.corner_radius,
+    height = settings.item_height,
+    corner_radius = settings.item_corner_radius,
     border_width = 0,
     image = {
-      corner_radius = settings.dimens.graphics.background.corner_radius
+      corner_radius = settings.item_corner_radius,
     }
   },
+  -- TODO: Add a popup menu styles
   popup = {
-    y_offset = settings.dimens.padding.popup,
-    align = "center",
     background = {
-      border_width = 0,
-      corner_radius = settings.dimens.graphics.background.corner_radius,
-      color = settings.colors.popup.bg,
+      drawing = true,
+      corner_radius = settings.bar_corner_radius,
+      color = colors.popup.bg,
       shadow = { drawing = true },
-      padding_left = settings.dimens.padding.icon,
-      padding_right = settings.dimens.padding.icon,
+      image = {
+        corner_radius = settings.bar_corner_radius,
+        padding_left = settings.popup_image_padding,
+        padding_right = settings.popup_image_padding,
+      }
     },
-    blur_radius = settings.dimens.graphics.blur_radius,
+    blur_radius = settings.popup_blur_radius,
+    y_offset = settings.popup_y_offset,
   },
-  slider = {
-    highlight_color = settings.colors.orange,
-    background = {
-      height = settings.dimens.graphics.slider.height,
-      corner_radius = settings.dimens.graphics.background.corner_radius,
-      color = settings.colors.slider.bg,
-      border_color = settings.colors.slider.border,
-      border_width = 1,
-    },
-    knob = {
-      font = {
-        family = settings.fonts.text,
-        style = settings.fonts.styles.regular,
-        size = 32,
-      },
-      string = settings.icons.text.slider.knob,
-      drawing = false,
-    },
-  },
+  padding_left = settings.paddings,
+  padding_right = settings.paddings,
   scroll_texts = true,
 })

@@ -1,112 +1,100 @@
-local constants = require("constants")
-local settings = require("config.settings")
+local colors = require("colors")
+local settings = require("settings")
 
 local spaces = {}
 
-local swapWatcher = sbar.add("item", {
-  drawing = false,
-  updates = true,
-})
-
-local currentWorkspaceWatcher = sbar.add("item", {
-  drawing = false,
-  updates = true,
-})
-
--- Modify this file with Visual Studio Code - at least vim does have problems with the icons
--- copy "Icons" from the nerd fonts cheat sheet and replace icon and name accordingly below
--- https://www.nerdfonts.com/cheat-sheet
-local spaceConfigs <const> = {
-  ["1"] = { icon = "󱞁", name = "Notes" },
-  ["2"] = { icon = "", name = "Terminal" },
-  ["3"] = { icon = "󰖟", name = "Browser" },
-  ["4"] = { icon = "", name = "AltBrowser" },
-  ["5"] = { icon = "", name = "Remote" },
-  ["6"] = { icon = "", name = "Database" },
-  ["7"] = { icon = "󰊻", name = "Chat" },
-  ["8"] = { icon = "", name = "Mail" },
-  ["9"] = { icon = "", name = "Music" },
-  ["10"] = { icon = "󰌾", name = "Secrets" },
-  ["t"] = { icon = "", name = "Meeting" },
-}
-
-local function selectCurrentWorkspace(focusedWorkspaceName)
-  for sid, item in pairs(spaces) do
-    if item ~= nil then
-      local isSelected = sid == constants.items.SPACES .. "." .. focusedWorkspaceName
-      item:set({
-        icon = { color = isSelected and settings.colors.bg1 or settings.colors.white },
-        label = { color = isSelected and settings.colors.bg1 or settings.colors.white },
-        background = { color = isSelected and settings.colors.white or settings.colors.bg1 },
-      })
-    end
-  end
-
-  sbar.trigger(constants.events.UPDATE_WINDOWS)
-end
-
-local function findAndSelectCurrentWorkspace()
-  sbar.exec(constants.aerospace.GET_CURRENT_WORKSPACE, function(focusedWorkspaceOutput)
-    local focusedWorkspaceName = focusedWorkspaceOutput:match("[^\r\n]+")
-    selectCurrentWorkspace(focusedWorkspaceName)
-  end)
-end
-
-local function addWorkspaceItem(workspaceName)
-  local spaceName = constants.items.SPACES .. "." .. workspaceName
-  local spaceConfig = spaceConfigs[workspaceName]
-
-  spaces[spaceName] = sbar.add("item", spaceName, {
-    label = {
-      width = 0,
-      padding_left = 0,
-      string = spaceConfig.name,
-    },
+for i = 1, 9, 1 do
+  local space = sbar.add("space", "space." .. i, {
+    space = i,
     icon = {
-      string = spaceConfig.icon or settings.icons.apps["default"],
-      color = settings.colors.white,
+      drawing = false,
+    },
+    label = {
+      string = string.format("%02d", i),
+      padding_left = settings.item_padding,
+      padding_right = settings.item_padding,
+      color = colors.grey,
+      highlight_color = colors.white,
+      align = "center",
     },
     background = {
-      color = settings.colors.bg1,
+      height = settings.item_height,
+      color = colors.transparent,  -- Start transparent
+      corner_radius = settings.item_corner_radius,
     },
-    click_script = "aerospace workspace " .. workspaceName,
+    popup = { 
+      background = { 
+        border_width = settings.popup_border_width, 
+        border_color = colors.red,
+        drawing = true  -- Make sure popup can draw
+      } 
+    }
   })
 
-  spaces[spaceName]:subscribe("mouse.entered", function(env)
-    sbar.animate("tanh", 30, function()
-      spaces[spaceName]:set({ label = { width = "dynamic" } })
-    end)
-  end)
+  spaces[i] = space
 
-  spaces[spaceName]:subscribe("mouse.exited", function(env)
-    sbar.animate("tanh", 30, function()
-      spaces[spaceName]:set({ label = { width = 0 } })
-    end)
-  end)
-
-  sbar.add("item", spaceName .. ".padding", {
-    width = settings.dimens.padding.label
+  -- Padding space
+  sbar.add("space", "space.padding." .. i, {
+    space = i,
+    script = "",
+    width = settings.spacings,
   })
-end
 
-local function createWorkspaces()
-  sbar.exec(constants.aerospace.LIST_ALL_WORKSPACES, function(workspacesOutput)
-    for workspaceName in workspacesOutput:gmatch("[^\r\n]+") do
-      addWorkspaceItem(workspaceName)
+  local space_popup = sbar.add("item", {
+    position = "popup." .. space.name,
+    background = {
+      padding_left = settings.popup_border_width,
+      drawing = true,
+      image = {
+        corner_radius = settings.bar_corner_radius,
+        scale = 0.15
+      }
+    }
+  })
+
+  space:subscribe("space_change", function(env)
+    local selected = env.SELECTED == "true"
+    space:set({
+      icon = { highlight = selected },
+      label = { 
+        highlight = selected,
+        string = string.format("%02d", tonumber(env.SID))
+      },
+      background = { 
+        color = selected and colors.spaces.active or colors.spaces.inactive,
+      },
+      width = selected and 30 or 30
+    })
+  end)
+
+  space:subscribe("mouse.clicked", function(env)
+    if env.BUTTON == "other" then
+      space_popup:set({ background = { image = "space." .. env.SID } })
+      space:set({ popup = { drawing = "toggle" } })
+    else
+      local op = (env.BUTTON == "right") and "--destroy" or "--focus"
+      sbar.exec("yabai -m space " .. op .. " " .. env.SID)
     end
-
-    findAndSelectCurrentWorkspace()
   end)
+
+  space:subscribe("mouse.entered", function(env)
+    space_popup:set({ background = { image = "space." .. env.SID } })
+    space:set({ popup = { drawing = "toggle" } })
+  end)
+  
+  space:subscribe("mouse.exited", function(_)
+    space:set({ popup = { drawing = false } })
+  end)
+
 end
 
-swapWatcher:subscribe(constants.events.SWAP_MENU_AND_SPACES, function(env)
-  local isShowingSpaces = env.isShowingMenu == "off" and true or false
-  sbar.set("/" .. constants.items.SPACES .. "\\..*/", { drawing = isShowingSpaces })
-end)
+local space_window_observer = sbar.add("item", {
+  drawing = false,
+  updates = true,
+})
 
-currentWorkspaceWatcher:subscribe(constants.events.AEROSPACE_WORKSPACE_CHANGED, function(env)
-  selectCurrentWorkspace(env.FOCUSED_WORKSPACE)
-  sbar.trigger(constants.events.UPDATE_WINDOWS)
-end)
-
-createWorkspaces()
+-- Add a spacer after the spaces
+sbar.add("item", "spaces.spacer", {
+  width = settings.item_spacing,
+  background = { drawing = false }
+})
