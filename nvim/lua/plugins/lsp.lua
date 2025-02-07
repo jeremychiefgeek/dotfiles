@@ -13,6 +13,12 @@ return {
         "ols",
       })
     end,
+    setup = {
+      registries = {
+        "github:mason-org/mason-registry",
+        "github:crashdummyy/mason-registry",
+      },
+    },
   },
   {
     "neovim/nvim-lspconfig",
@@ -21,7 +27,6 @@ return {
       ---@type lspconfig.options
       servers = {
         cssls = {},
-        omnisharp = {},
         tailwindcss = {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
@@ -163,7 +168,7 @@ return {
         -- adjusts spacing to ensure icons are aligned
         nerd_font_variant = "normal",
         kind_icons = {
-          Text = "",
+          Text = "󰊄",
           Method = "󰊕",
           Function = "󰊕",
           Constructor = "",
