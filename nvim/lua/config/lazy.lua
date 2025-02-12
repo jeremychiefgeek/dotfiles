@@ -22,7 +22,8 @@ require("lazy").setup({
       opts = {
         --colorscheme = "catppuccin",
         --colorscheme = "nord",
-        colorscheme = "nordic",
+        -- colorscheme = "nordic",
+        colorscheme = "gruber-darker",
       },
     },
     { import = "lazyvim.plugins.extras.linting.eslint" },

@@ -1,4 +1,8 @@
 return {
+  {
+    "echasnovski/mini.ai",
+    enabled = false,
+  },
   -- Hihglight colors
   {
     "echasnovski/mini.hipatterns",
