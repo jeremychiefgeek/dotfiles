@@ -140,7 +140,6 @@ alt-7 = 'workspace --auto-back-and-forth 7'  # Chat
 alt-8 = 'workspace --auto-back-and-forth 8'  # Mail
 alt-9 = 'workspace --auto-back-and-forth 9'  # Music
 alt-0 = 'workspace --auto-back-and-forth 10' # Secrets
-alt-t = 'workspace --auto-back-and-forth t'  # Meeting
 
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
@@ -152,7 +151,6 @@ alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 10'
-alt-shift-t = 'move-node-to-workspace t'
 
 alt-tab = 'workspace-back-and-forth'
 alt-p = 'move-workspace-to-monitor --wrap-around next'
