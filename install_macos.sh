@@ -8,6 +8,9 @@ xcode-select --install
 ## Install
 echo "Installing Brew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo >> /Users/jeremyevans/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/jeremyevans/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 brew analytics off
 
 ## Taps
@@ -110,7 +113,7 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 ## Install
 echo "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-source $HOME/.zshrc
+source $HOME/.zprofile
 nvm install node # "node" is an alias for the latest version
 node -v
 npm -v
