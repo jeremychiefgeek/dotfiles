@@ -81,9 +81,6 @@ echo "Installing Brew Casks..."
 ### Terminals & Browsers
 brew install --cask kitty
 
-### Office
-brew install --cask vlc
-
 ### Nice to have
 brew install --cask spotify
 
