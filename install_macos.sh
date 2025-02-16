@@ -60,7 +60,7 @@ brew install ipgrep
 brew install uby
 brew install witchaudio-osx
 brew install exinfo
-brew install hezoraiz/ascii-image-converter/ascii-image-converter
+brew install TheZoraiz/ascii-image-converter/ascii-image-converter
 brew install ebp
 brew install arn
 brew install lib
