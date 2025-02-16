@@ -15,6 +15,8 @@ echo "Tapping Brew..."
 brew tap homebrew/cask-fonts
 brew tap FelixKratz/formulae
 brew tap koekeishiya/formulae
+brew tap hezoraiz/ascii-image-converter
+brew tap nikitabobko/tap
 
 ## Formulae
 echo "Installing Brew Formulae..."
@@ -34,6 +36,38 @@ brew install ifstat
 brew install switchaudio-osx
 brew install sketchybar
 brew install borders
+brew install utoconf
+brew install top
+brew install make
+brew install oreutils
+brew install bus
+brew install xpat
+brew install d
+brew install zf
+brew install cc
+brew install nu-sed
+brew install ibffi
+brew install ibgccjit
+brew install ibiconv
+brew install ibrsvg
+brew install ibxml2
+brew install ittle-cms2
+brew install ua
+brew install ailutils
+brew install ake
+brew install owplaying-cli
+brew install kgconf
+brew install npm
+brew install edis
+brew install ipgrep
+brew install uby
+brew install witchaudio-osx
+brew install exinfo
+brew install ascii-image-converter
+brew install ebp
+brew install arn
+brew install lib
+brew install odin
 
 ### Terminal
 brew install neovim
@@ -64,7 +98,28 @@ brew install --cask font-fira-code
 brew install --cask font-fira-code-nerd-font
 
 ### Tiling Manager
-brew install --cask nikitabobko/tap/aerospace
+brew install --cask aerospace
+
+# Dotnet
+## Isntall
+echo "Installing DOTNET 8..."
+wget https://dot.net/v1/dotnet-install.sh
+chmod +x dotnet-install.sh
+./dotnet-install.sh
+echo "Done Installing Dotnet... removing script and checking if worked"
+rm -r dotnet-install.sh
+dotnet --info
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+
+# Node.js
+## Install
+echo "Installing nvm..."
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+nvm install node # "node" is an alias for the latest version
+node -v
+npm -v
+
 
 # Mac App Store Apps
 echo "Installing Mac App Store Apps..."
@@ -72,6 +127,7 @@ mas install 497799835  #xCode
 
 # macOS Settings
 echo "Changing macOS defaults..."
+mkdir $HOME/Pictures/ScreenShots
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1 # Allows the network browser to show all available network interfaces—not just the usual ones.
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true # Stops macOS from creating hidden .DS_Store files on network volumes.
 defaults write com.apple.spaces spans-displays -bool false # Keeps each display’s virtual desktops (Spaces) separate rather than spanning them across all screens.
@@ -86,7 +142,7 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true # Makes Finder d
 defaults write NSGlobalDomain _HIHideMenuBar -bool true # Causes the menu bar to hide automatically (usually in full-screen mode or on newer macOS versions).
 defaults write NSGlobalDomain AppleHighlightColor -string "0.65098 0.85490 0.58431" # Changes the system selection (highlight) color to a custom RGB value.
 defaults write NSGlobalDomain AppleAccentColor -int 1 # Selects one of the available system accent colors (the exact color depends on macOS version).
-defaults write com.apple.screencapture location -string "$HOME/Desktop" # Saves all screenshots to your Desktop instead of the default folder.
+defaults write com.apple.screencapture location -string "$HOME/Pictures/ScreenShots" # Saves all screenshots to $HOME/Pictures/ScreenShots instead of the default folder.
 defaults write com.apple.screencapture disable-shadow -bool true # Removes the drop shadow from screenshots.
 defaults write com.apple.screencapture type -string "png" # Ensures screenshots are saved as PNG files.
 defaults write com.apple.finder DisableAllAnimations -bool true # Eliminates certain animations in Finder for a faster, more responsive feel.
@@ -111,6 +167,12 @@ defaults write -g NSWindowShouldDragOnGesture YES # Lets you drag a window by cl
 
 # Copying and checking out configuration files
 echo "Planting Configuration Files..."
+ln -s $HOME/dotfiles/aerospace/ $HOME/.config/aerospace
+ln -s $HOME/dotfiles/kitty $HOME/.config/kitty
+ln -s $HOME/dotfiles/nvim $HOME/.config/nvim
+ln -s $HOME/dotfiles/sketchybar $HOME/.config/sketchybar
+ln -s $HOME/dotfiles/starship.toml $HOME/.config/starship.toml
+ln -s $HOME/dotfiles/borders $HOME/.config/borders
 
 # Installing Fonts
 git clone git@github.com:shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono_Nerd_Font
