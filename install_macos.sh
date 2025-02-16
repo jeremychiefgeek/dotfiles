@@ -110,6 +110,7 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 ## Install
 echo "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+source $HOME/.zshrc
 nvm install node # "node" is an alias for the latest version
 node -v
 npm -v
