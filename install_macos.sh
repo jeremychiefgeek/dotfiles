@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 # Install xCode cli tools
-echo "Installing commandline tools..."
-xcode-select --install
+#echo "Installing commandline tools..."
+#xcode-select --install
 
 # Homebrew
 ## Install
@@ -37,7 +37,7 @@ brew install switchaudio-osx
 brew install sketchybar
 brew install borders
 brew install utoconf
-brew install top
+brew install btop
 brew install make
 brew install oreutils
 brew install bus
@@ -105,9 +105,10 @@ chmod +x dotnet-install.sh
 ./dotnet-install.sh
 echo "Done Installing Dotnet... removing script and checking if worked"
 rm -r dotnet-install.sh
-dotnet --info
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+source $HOME/.zprofile
+dotnet --info
 
 # Node.js
 ## Install
