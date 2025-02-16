@@ -12,11 +12,8 @@ brew analytics off
 
 ## Taps
 echo "Tapping Brew..."
-brew tap homebrew/cask-fonts
 brew tap FelixKratz/formulae
 brew tap koekeishiya/formulae
-brew tap hezoraiz/ascii-image-converter
-brew tap nikitabobko/tap
 
 ## Formulae
 echo "Installing Brew Formulae..."
@@ -63,7 +60,7 @@ brew install ipgrep
 brew install uby
 brew install witchaudio-osx
 brew install exinfo
-brew install ascii-image-converter
+brew install hezoraiz/ascii-image-converter/ascii-image-converter
 brew install ebp
 brew install arn
 brew install lib
@@ -98,7 +95,7 @@ brew install --cask font-fira-code
 brew install --cask font-fira-code-nerd-font
 
 ### Tiling Manager
-brew install --cask aerospace
+brew install --cask nikitabobko/tap/aerospace
 
 # Dotnet
 ## Isntall
