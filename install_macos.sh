@@ -185,4 +185,9 @@ echo "Starting Services (grant permissions)..."
 brew services start sketchybar
 brew services start borders
 
+
+# Make wanted folders
+mkdir $HOME/development
+
 echo "Installation complete...\n"
+
