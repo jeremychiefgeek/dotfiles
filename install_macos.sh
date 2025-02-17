@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 # Install xCode cli tools
-#echo "Installing commandline tools..."
-#xcode-select --install
+echo "Installing commandline tools..."
+xcode-select --install
 
 # Homebrew
 ## Install
@@ -37,7 +37,7 @@ brew install switchaudio-osx
 brew install sketchybar
 brew install borders
 brew install utoconf
-brew install btop
+brew install top
 brew install make
 brew install oreutils
 brew install bus
@@ -105,8 +105,8 @@ chmod +x dotnet-install.sh
 ./dotnet-install.sh
 echo "Done Installing Dotnet... removing script and checking if worked"
 rm -r dotnet-install.sh
-export DOTNET_ROOT=$HOME/.dotnet
-export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+export DOTNET_ROOT=$HOME/.dotnet >> .zprofile
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools >> .zprofile
 source $HOME/.zprofile
 dotnet --info
 
@@ -156,10 +156,10 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true # Displays th
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv" # Sets Finder’s default window layout to list view (“Nlsv” stands for “list view”).
 defaults write com.apple.finder ShowStatusBar -bool false # Removes the status bar at the bottom of Finder windows.
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool YES # Prevents Time Machine from asking if you want to use newly connected drives for backups.
-defaults write com.apple.Safari AutoOpenSafeDownloads -bool false # Stops Safari from automatically opening files it considers “safe” after downloading.
-defaults write com.apple.Safari IncludeDevelopMenu -bool true # Adds a Develop menu to Safari for accessing developer tools.
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true # Activates additional WebKit-based developer options in Safari.
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true # Further ensures that WebKit2’s developer tools are enabled in Safari.
+# defaults write com.apple.Safari AutoOpenSafeDownloads -bool false # Stops Safari from automatically opening files it considers “safe” after downloading.
+# defaults write com.apple.Safari IncludeDevelopMenu -bool true # Adds a Develop menu to Safari for accessing developer tools.
+# defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true # Activates additional WebKit-based developer options in Safari.
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true # Further ensures that WebKit2’s developer tools are enabled in Safari.
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true # Allows developer features (like inspecting elements) to be used in other apps that use WebKit.
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false # When copying email addresses from Mail, only the address is copied—not the associated name.
 defaults write -g NSWindowShouldDragOnGesture YES # Lets you drag a window by clicking and holding anywhere within it (not just the title bar).
