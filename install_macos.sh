@@ -171,7 +171,7 @@ defaults write -g NSWindowShouldDragOnGesture YES # Lets you drag a window by cl
 # Copying and checking out configuration files
 echo "Planting Configuration Files..."
 git clone git@github.com:jeremychiefgeek/dotfiles.git
-ln -s $HOME/dotfiles/aerospace/ $HOME/.config/aerospace
+ln -s $HOME/dotfiles/aerospace $HOME/.config/aerospace
 ln -s $HOME/dotfiles/kitty $HOME/.config/kitty
 ln -s $HOME/dotfiles/nvim $HOME/.config/nvim
 ln -s $HOME/dotfiles/sketchybar $HOME/.config/sketchybar
