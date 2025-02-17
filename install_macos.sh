@@ -4,6 +4,10 @@
 echo "Installing commandline tools..."
 xcode-select --install
 
+# Make wanted folders
+mkdir $HOME/development
+mkdir $HOME/.config
+
 # Homebrew
 ## Install
 echo "Installing Brew..."
@@ -186,8 +190,6 @@ brew services start sketchybar
 brew services start borders
 
 
-# Make wanted folders
-mkdir $HOME/development
 
 echo "Installation complete...\n"
 
