@@ -62,11 +62,12 @@ preset = 'qwerty'
 # outer.top = 55
 # outer.right = 20
 outer.bottom = [{ monitor.'^built-in retina display$' = 20 }, 40]
-outer.top = [{ monitor.'^built-in retina display$' = 27 }, 82]
-outer.left = 40
-outer.right = 40
-inner.horizontal = 40
-inner.vertical = 40
+# outer.top = [{ monitor.'^built-in retina display$' = 27 }, 40]
+outer.top = 10
+outer.left = 10
+outer.right = 10
+inner.horizontal = 10
+inner.vertical = 10
 
 [exec] # Again, you don't need to copy all config sections to your config.
 inherit-env-vars = true # If you don't touch "exec" section,

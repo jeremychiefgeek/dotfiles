@@ -201,7 +201,6 @@ return {
         -- with blink.compat
         compat = {},
         default = { "lsp", "snippets", "path", "buffer" }, -- removed lsp, snippets
-        cmdline = {},
       },
       keymap = {
         ["<D-c>"] = { "show" },
