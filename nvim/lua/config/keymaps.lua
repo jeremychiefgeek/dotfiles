@@ -89,6 +89,28 @@ keymap.set("n", "<Leader>du", function()
   require("dapui").toggle()
 end, { desc = "Toggle Debug UI" })
 
+--C#
+keymap.set(
+  "n",
+  "<leader>td",
+  "<cmd>w|lua require('neotest').run.run({vim.fn.expand('%'), strategy = require('neotest-dotnet.strategies.netcoredbg'), is_custom_dotnet_debug = true})<cr>",
+  { desc = "Debug File" }
+)
+
+keymap.set(
+  "n",
+  "<leader>tL",
+  "<cmd>w|lua require('neotest').run.run_last({strategy = require('neotest-dotnet.strategies.netcoredbg'), is_custom_dotnet_debug = true})<cr>",
+  { desc = "Debug Last" }
+)
+
+keymap.set(
+  "n",
+  "<leader>tN",
+  "<cmd>w|lua require('neotest').run.run({strategy = require('neotest-dotnet.strategies.netcoredbg'), is_custom_dotnet_debug = true})<cr>",
+  { desc = "Debug Nearest" }
+)
+
 -- Open compiler
 keymap.set("n", "<F6>", "<cmd>CompilerOpen<cr>", { noremap = true, silent = true })
 
