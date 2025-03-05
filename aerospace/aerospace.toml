@@ -61,9 +61,9 @@ preset = 'qwerty'
 # outer.bottom = 20
 # outer.top = 55
 # outer.right = 20
-outer.bottom = [{ monitor.'^built-in retina display$' = 20 }, 40]
-# outer.top = [{ monitor.'^built-in retina display$' = 27 }, 40]
-outer.top = 10
+outer.bottom = [{ monitor.'^built-in retina display$' = 10 }, 10]
+outer.top = [{ monitor.'^built-in retina display$' = 10 }, 40]
+#outer.top = 10
 outer.left = 10
 outer.right = 10
 inner.horizontal = 10
