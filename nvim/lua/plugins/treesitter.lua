@@ -19,6 +19,7 @@ return {
         "c",
         "vue",
         "odin",
+        "swift",
       },
       auto_install = true,
       hightlight = {

@@ -36,43 +36,6 @@ return {
     config = function() end,
   },
   {
-    "mfussenegger/nvim-dap",
-    opts = {
-      setup = {
-        netcoredbg = function(_, _)
-          local dap = require("dap")
-
-          local function get_debugger()
-            local mason_registry = require("mason-registry")
-            local debugger = mason_registry.get_package("netcoredbg")
-            return debugger:get_install_path() .. "/netcoredbg"
-          end
-
-          dap.configurations.cs = {
-            {
-              type = "coreclr",
-              name = "launch - netcoredbg",
-              request = "launch",
-              program = function()
-                return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
-              end,
-            },
-          }
-          dap.adapters.coreclr = {
-            type = "executable",
-            command = get_debugger(),
-            args = { "--interpreter=vscode" },
-          }
-          dap.adapters.netcoredbg = {
-            type = "executable",
-            command = get_debugger(),
-            args = { "--interpreter=vscode" },
-          }
-        end,
-      },
-    },
-  },
-  {
     "nvim-neotest/neotest",
     dependencies = {
       "Issafalcon/neotest-dotnet",
@@ -131,6 +94,7 @@ return {
           },
         },
         html = {},
+        sourcekit = {},
         lua_ls = {
           -- enabled = false,
           single_file_support = true,
