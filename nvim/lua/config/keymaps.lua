@@ -130,3 +130,7 @@ keymap.set("n", "<S-F7>", "<cmd>CompilerToggleResults<cr>", { noremap = true, si
 keymap.set("n", "<C-j>", function()
   vim.diagnostic.goto_next()
 end, opts)
+
+-- XCode Keymaps
+vim.keymap.set("n", "<leader>dp", "<cmd>XcodebuildPicker<cr>", { desc = "Show Xcodebuild Actions" })
+vim.keymap.set("n", "<leader>df", "<cmd>XcodebuildProjectManager<cr>", { desc = "Show Project Manager Actions" })
