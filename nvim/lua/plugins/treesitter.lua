@@ -18,6 +18,8 @@ return {
         "c_sharp",
         "c",
         "vue",
+        "odin",
+        "swift",
       },
       auto_install = true,
       hightlight = {

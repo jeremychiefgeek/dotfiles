@@ -5,8 +5,11 @@ echo "This script is regularly updated and fits the needs of me and only me. If 
 
 echo "Do you wish to install this program?"
 select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) ./install_popos.sh; break;;
-        No ) exit;;
-    esac
+  case $yn in
+  Yes)
+    ./install_macos.sh
+    break
+    ;;
+  No) exit ;;
+  esac
 done

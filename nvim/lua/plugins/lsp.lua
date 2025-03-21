@@ -10,6 +10,39 @@ return {
         "tailwindcss-language-server",
         "typescript-language-server",
         "css-lsp",
+        "ols",
+      })
+    end,
+    setup = {
+      registries = {
+        "github:mason-org/mason-registry",
+        "github:crashdummyy/mason-registry",
+      },
+    },
+  },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = "mason.nvim",
+    opts = {
+      -- You'll need to check that you have the required things installed
+      -- online, please don't ask me how to install them :)
+      ensure_installed = {
+        -- Update this to ensure that you have the debuggers for the langs you want
+        "coreclr",
+        "netcoredbg",
+      },
+    },
+    -- mason-nvim-dap is loaded when nvim-dap loads
+    config = function() end,
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "Issafalcon/neotest-dotnet",
+    },
+    opts = function(_, opts)
+      vim.list_extend(opts.adapters, {
+        require("neotest-dotnet"),
       })
     end,
   },
@@ -19,8 +52,11 @@ return {
       inlay_hints = { enabled = true },
       ---@type lspconfig.options
       servers = {
+        -- omnisharp = {
+        --   organize_imports_on_format = true,
+        --   enable_import_completion = true,
+        -- },
         cssls = {},
-        omnisharp = {},
         tailwindcss = {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
@@ -58,6 +94,7 @@ return {
           },
         },
         html = {},
+        sourcekit = {},
         lua_ls = {
           -- enabled = false,
           single_file_support = true,
@@ -124,13 +161,63 @@ return {
           },
         },
       },
-      setup = {},
+      setup = {
+        -- omnisharp = function()
+        --   local lsp_utils = require("base.lsp.utils")
+        --   lsp_utils.on_attach(function(client, bufnr)
+        --     if client.name == "omnisharp" then
+        --       local map = function(mode, lhs, rhs, desc)
+        --         if desc then
+        --           desc = desc
+        --         end
+        --         vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
+        --       end
+        --
+        --       -- https://github.com/OmniSharp/omnisharp-roslyn/issues/2483
+        --       local function toSnakeCase(str)
+        --         return string.gsub(str, "%s*[- ]%s*", "_")
+        --       end
+        --
+        --       local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+        --       for i, v in ipairs(tokenModifiers) do
+        --         tokenModifiers[i] = toSnakeCase(v)
+        --       end
+        --       local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+        --       for i, v in ipairs(tokenTypes) do
+        --         tokenTypes[i] = toSnakeCase(v)
+        --       end
+        --
+        --       -- C# keymappings
+        --       map(
+        --         "n",
+        --         "<leader>td",
+        --         "<cmd>w|lua require('neotest').run.run({vim.fn.expand('%'), strategy = require('neotest-dotnet.strategies.netcoredbg'), is_custom_dotnet_debug = true})<cr>",
+        --         "Debug File"
+        --       )
+        --
+        --       map(
+        --         "n",
+        --         "<leader>tL",
+        --         "<cmd>w|lua require('neotest').run.run_last({strategy = require('neotest-dotnet.strategies.netcoredbg'), is_custom_dotnet_debug = true})<cr>",
+        --         "Debug Last"
+        --       )
+        --
+        --       map(
+        --         "n",
+        --         "<leader>tN",
+        --         "<cmd>w|lua require('neotest').run.run({strategy = require('neotest-dotnet.strategies.netcoredbg'), is_custom_dotnet_debug = true})<cr>",
+        --         "Debug Nearest"
+        --       )
+        --     end
+        --   end)
+        -- end,
+      },
     },
   },
   {
     "saghen/blink.cmp",
     event = "InsertEnter",
-    enabled = false,
+    enabled = true,
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.compat",
@@ -141,6 +228,11 @@ return {
       -- add blink.compat to dependencies
       {
         "saghen/blink.compat",
+        dependencies = {
+          "hrsh7th/cmp-buffer", -- Buffer completion
+          "hrsh7th/cmp-path", -- Path completion
+          "L3MON4D3/LuaSnip", -- Snippet engine (optional)
+        },
         optional = true, -- make optional so it's only enabled if any extras need it
         opts = {},
         version = not vim.g.lazyvim_blink_main and "*",
@@ -149,7 +241,6 @@ return {
     opts = {
       completion = {},
       appearance = {
-        use_nvim_cmp_as_default = true,
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
         -- will be removed in a future release, assuming themes add support
@@ -158,7 +249,7 @@ return {
         -- adjusts spacing to ensure icons are aligned
         nerd_font_variant = "normal",
         kind_icons = {
-          Text = "",
+          Text = "󰊄",
           Method = "󰊕",
           Function = "󰊕",
           Constructor = "",
@@ -190,8 +281,7 @@ return {
         -- adding any nvim-cmp sources here will enable them
         -- with blink.compat
         compat = {},
-        default = { "lsp", "path", "snippets", "buffer" },
-        cmdline = {},
+        default = { "lsp", "snippets", "path", "buffer" }, -- removed lsp, snippets
       },
       keymap = {
         ["<D-c>"] = { "show" },

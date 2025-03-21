@@ -5,7 +5,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    enabled = false,
+    enabled = true,
   },
   {
     "folke/which-key.nvim",
