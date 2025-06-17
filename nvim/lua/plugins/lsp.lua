@@ -7,12 +7,13 @@ return {
     opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
-        "stylua",
+        "luacheck",
+        "shellcheck",
         "shfmt",
-        "prettier",
+        "tailwindcss-language-server",
+        "typescript-language-server",
+        "css-lsp",
         "ols",
-        "vetur-vls",
-        "cpplint",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
