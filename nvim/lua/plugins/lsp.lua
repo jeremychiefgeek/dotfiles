@@ -14,6 +14,7 @@ return {
         "typescript-language-server",
         "css-lsp",
         "ols",
+        "vue-language-server",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
