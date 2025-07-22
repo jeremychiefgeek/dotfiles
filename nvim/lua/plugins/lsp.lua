@@ -14,6 +14,11 @@ return {
         "typescript-language-server",
         "css-lsp",
         "ols",
+        "csharpier",
+      },
+      registries = {
+        "github:Crashdummyy/mason-registry",
+        "github:mason-org/mason-registry",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
