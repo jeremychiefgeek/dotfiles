@@ -15,6 +15,8 @@ return {
         "css-lsp",
         "ols",
         "csharpier",
+        "prettier",
+        "vue-language-server",
       },
       registries = {
         "github:Crashdummyy/mason-registry",
